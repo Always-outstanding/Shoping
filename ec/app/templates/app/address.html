@@ -1,0 +1,40 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %} العنوان{% endblock title %}
+{% block main-content %}
+    <div class="container">
+        <div class="row my-5">
+                <h3>مرحبا<span class="text-capitalize">{{request.user}}</span></h3>
+        
+        <div class="col-sm-2 border-end">
+            <ul class="list-unstyled">
+                <li class="d-grid"><a href="{%url 'profile'%}" class="btn btn-dark">البرفايل</a></li><br>
+                <li class="d-grid"><a href="{%url 'address'%}" class="btn btn-dark">العنوان</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-8 offset-sm-1 text-center">
+            <div class="row">
+                {% for ad in add  %}
+                    <div class="col-sm-6">
+                        <div class="card m-2">
+                            <div class="card-body">
+                                <h3>العنوان : {{forloop.counter}}</h3>
+                                <p>الاسم : {{ad.name}}</p>
+                                <p>الموقع : {{ad.locality}}</p>
+                                <p>رقم الهاتف : {{ad.mobile}}</p>
+                                <p>المدينة : {{ad.city}}</p>
+                                <p>الحالة : {{ad.state}}</p>
+                                <p>الرمز السري : {{ad.zipcode}}</p>
+                                <br>
+                                
+                                <p class="text-center"><a href="{%url 'updateAddress' pk=ad.id%}" type="button" class="btn btn-danger" >
+                                    تعديل</a></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

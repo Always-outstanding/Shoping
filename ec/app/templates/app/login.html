@@ -1,0 +1,32 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}تسجيل الدخول{% endblock title %}
+{% block main-content %}
+    <div class="container">
+        <div class="row my-3">
+            <div class="col-sm-6 offset-sm-3">
+                <h3 class="text-center">  تسجيل  الدخول </h3>
+                <br>
+                <form action="" method="post" novalidate class="shadow p-5 text-center">
+                    {% csrf_token %}
+                    {% for fm in form %}
+                        {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.error|striptags}}</small><br>
+                    {% endfor %}
+
+                    <small><a href="{% url 'password_reset' %}" > نسيت كلمة المرور</a></small>
+                    <br>
+                    <input type="submit" value="دخول" class="btn btn-danger mt-4"><br>
+                    <div class="text-center text-primary fw-bold">
+                        <small>تسجيل حساب جديد  <a href="{%url 'customerregistration'%}" class="text-danger">التسجيل الأن</a></small>
+                    </div>
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <p class ="alert alert-danger my-3">{{error}}</p>
+                        {% endfor %}
+                    {% endif %}
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock main-content %}
